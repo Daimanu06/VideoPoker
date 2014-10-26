@@ -30,6 +30,7 @@ namespace VideoPoker {
 
         struct Cards : public Window {
             Cards(int h, int w, int y, int x);
+            ~Cards();
             void render() override;
         };
 

@@ -40,6 +40,9 @@ Game::Impl::Impl() {
 
     validate_interface();
 
+    start_color();
+    init_pair(1, COLOR_WHITE, COLOR_GREEN);
+
     noecho();
     curs_set(0); //hide cursor
     //h w y x

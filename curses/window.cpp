@@ -22,10 +22,19 @@ namespace VideoPoker {
 
         /*** Cards window ***/
         Cards::Cards(int h, int w, int y, int x) :
-            Window(h, w, y, x) {}
+            Window(h, w, y, x)
+        {
+            //box(win.get(), 0, 0);
+            wattron(win.get(), COLOR_PAIR(1));
+            for(int i = 0; i < h; i++)
+                mvwhline(win.get(), i, 0, ' ', COLS);
+        }
+        Cards::~Cards() {
+            wattroff(win.get(), COLOR_PAIR(1));
+        }
 
         void Cards::render() {
-            mvwprintw(win.get(), 0, 0, "+-----+");
+            //mvwprintw(win.get(), 0, 0, "+-----+");
             //TODO: create 5 Card in Cards
             wrefresh(win.get());
         }
