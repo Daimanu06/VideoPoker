@@ -18,11 +18,11 @@ class Game::Impl {
 
     private:
         void validate_interface();
-        bool run = true;
 
     private:
-        std::vector<std::unique_ptr<TUI::Window>> wins;
-        Machine m_machine;
+        std::vector<std::unique_ptr<TUI::Window>> wins; //Views
+        Machine m_machine; //Model
+        bool run = true;
 };
 
 Game::Game() : pimpl(new Impl()) {}
@@ -46,7 +46,7 @@ Game::Impl::Impl() {
     noecho();
     curs_set(0); //hide cursor
     //h w y x
-    wins.emplace_back(new Title   ( 1,         COLS, 0,         0 ));
+    wins.emplace_back(new Title   ( 1,         COLS, 0,         0));
     wins.emplace_back(new Cards   ( LINES - 9, COLS, 1,         0));
     wins.emplace_back(new Infos   ( 6,         COLS, LINES - 8, 0));
     wins.emplace_back(new Messages( 1,         COLS, LINES - 2, 0));
@@ -90,9 +90,10 @@ void Game::Impl::play() {
 }
 
 void Game::Impl::update() {
-    int ch = wgetch(wins.back()->win.get());
-    if(ch == 'q' || ch == 'Q') {
-        run = false;
+    for(auto& win : wins) {
+        GameState gs = win->update();
+        if(gs == GS_QUIT)
+            run = false;
     }
 }
 

@@ -3,6 +3,7 @@
 
 #include <ncurses.h>
 #include <memory>
+#include "game_state.h"
 
 namespace VideoPoker {
     namespace TUI {
@@ -13,6 +14,7 @@ namespace VideoPoker {
                 virtual ~Window() = default;
 
             public:
+                virtual GameState update() = 0;
                 virtual void render() = 0;
 
                 struct Deleter{
@@ -25,32 +27,38 @@ namespace VideoPoker {
 
         struct Title : public Window {
             Title(int h, int w, int y, int x);
+            GameState update() override;
             void render() override;
         };
 
         struct Cards : public Window {
             Cards(int h, int w, int y, int x);
             ~Cards();
+            GameState update() override;
             void render() override;
         };
 
         struct Card : public Window {
             Card(int h, int w, int y, int x);
+            GameState update() override;
             void render() override;
         };
 
         struct Messages : public Window {
             Messages(int h, int w, int y, int x);
+            GameState update() override;
             void render() override;
         };
 
         struct Infos : public Window {
             Infos(int h, int w, int y, int x);
+            GameState update() override;
             void render() override;
         };
 
         struct Controls : public Window {
             Controls(int h, int w, int y, int x);
+            GameState update() override;
             void render() override;
         };
 

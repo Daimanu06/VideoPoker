@@ -1,11 +1,13 @@
 #include "game.h"
 #include <iostream>
+#include <QApplication>
 
 int main(int argc, char **argv) {
     try {
-        setlocale(LC_ALL,"");
+        QApplication app(argc, argv);
         VideoPoker::Game game;
         game.play();
+        app.exec();
     } catch(const std::string &what) {
         std::cerr << "Fatal error: " << what << std::endl;
     } catch(const char *what) {

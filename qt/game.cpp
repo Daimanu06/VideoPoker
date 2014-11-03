@@ -1,34 +1,45 @@
 #include "game.h"
-#include "hand.h"
-#include "player.h"
 #include "machine.h"
-
-#include "printer.h"
-#include <iostream>
+#include "mainwindow.h"
+#include <QApplication>
 
 namespace VideoPoker {
 
-Game::Game() {
-    //
-}
+class Game::Impl {
+    public:
+        Impl();
+        ~Impl();
 
-Game::~Game() {
-    //
-}
+    public:
+        void play();
+        void update();
+        void render();
+
+    private:
+        MainWindow *m_window; //View
+        Machine m_machine; //Model
+};
+
+Game::Game() : pimpl(new Impl()) {}
+
+Game::~Game() {}
 
 void Game::play() {
-    Player player(100);
-    m_machine.bet(player.withdraw(50));
-
-    phase1();
+    pimpl->play();
 }
 
-void Game::phase1() {
-    std::cout << "First distribution\n";
-    Hand hand = m_machine.distribuate();
-    for(int i = 0; i < 5; i++)
-        std::cout << hand.get_card(i).get_rank() << hand.get_card(i).get_suit() << ' ';
-    std::cout << '\n';
+void Game::distribuate() {
+}
+
+/** Implementation **/
+Game::Impl::Impl() :
+    m_window(new MainWindow())
+{}
+
+Game::Impl::~Impl() {}
+
+void Game::Impl::play() {
+    m_window->show();
 }
 
 } //!namespace

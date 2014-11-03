@@ -2,7 +2,7 @@ TEMPLATE = subdirs
 
 CONFIG += C++11
 
-SUBDIRS += lib curses
+SUBDIRS += lib qt curses
 
 curses.depends = lib
 

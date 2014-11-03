@@ -6,6 +6,12 @@
 
 namespace VideoPoker {
 
+/**
+ * @class Game
+ *
+ * Controller class.
+ * Manages an user interface (View) and the data (Model).
+ */
 class Game {
     public:
         Game();

@@ -1,6 +1,7 @@
 TARGET = ../VideoPokerTUI
 
-HEADERS += window.h
+HEADERS += window.h \
+    game_state.h
 
 SOURCES += \
     main.cpp \
